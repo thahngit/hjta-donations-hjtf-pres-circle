@@ -16,6 +16,8 @@ class AuthorizeNetXMLResponse
 {
 
     public $xml; // Holds a SimpleXML Element with response.
+    public $response;
+    public $xpath_xml;
 
     /**
      * Constructor. Parses the AuthorizeNet response string.
@@ -69,9 +71,8 @@ class AuthorizeNetXMLResponse
      */    
     public function getErrorMessage()
     {
-        return "Error: {$this->getResultCode()} 
-        Message: {$this->getMessageText()}
-        {$this->getMessageCode()}";    
+        return "Error: " . $this->getResultCode() . " \n        Message: " . $this->getMessageText() . "
+        " . $this->getMessageCode();
     }
     
     /**
