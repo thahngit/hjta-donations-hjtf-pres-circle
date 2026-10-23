@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HJTF - President's Circle</title>
+<link rel="icon" href="/global/images/hjta-favicon.ico">
+<link href='https://fonts.googleapis.com/css?family=EB Garamond' rel='stylesheet'>
+<style>
+body {background-color: #A3BFCE; margin: 0; font-family: sans-serif; font-size: 18px; line-height: 24px !important; color: #333333;}
+input, textarea, select {
+    border-radius: 5px;
+    border: 1px solid #499bd4;
+    padding: 5px;
+	font: inherit;
+}
+#main-wrap {width: 1280px; margin: 0 auto;}
+#inner-wrap {margin: 20px 50px;}
+#thank-you-image-wrap {padding-left: 26px; padding-bottom: 0;}
+#thank-you-text-wrap {padding: 0 30px 0 62px;}
+#thank-you-text-wrap p {font-family: 'EB Garamond';font-size: 24px; margin-top: 0;}
+#form-header {background-color: #2F576E; font-family: Open Sans; color: #ffffff; padding: 20px 30px; height: 70px;}
+.form-content-header {width: 45%;}
+.form-content-header.left {float: left;}
+.form-content-header.right {float: right; text-align: right;}
+#form-header h1 {margin: 0;font-family: sans-serif;
+    font-size: 24pt; line-height: 24pt;text-transform: uppercase;}
+#form-header h1	span.h1-smaller {font-size: 20pt;}
+#form-content {background-color: #ffffff; padding: 30px; clear: both;}
+#form-content fieldset {border: 1px solid #e5e5e5; padding: 3rem; margin: 2rem auto;}
+#form-content fieldset h3 {margin: 0 0 2rem; font-size: 20px; color: #0f2c71;}
+#donateAmount > div {
+    float: left;
+    min-width: 20%;
+}
+#donateAmount .option {
+    display: block;
+    font-size: 1.28em;
+    line-height: 1.5em;
+}
+.formitem {margin-bottom: 1em; clear: both;}
+.formitem label {width: 28%; text-align: right; display: block; float: left; padding-right: 0.5em;}
+input, textarea, select{border-radius: 5px; border: 1px solid #499bd4; padding: 5px;}
+#CVV {
+    width: auto;
+}
+.formitem img {
+    vertical-align: top;
+    margin-left: 1em;
+}
+#form-content fieldset#buttons {
+    border: none;
+    margin-top: 0;
+    padding-top: 0;
+	    display: inline-block;
+    width: 92%;
+    text-align: center;
+}
+.formitem {
+    margin-bottom: 1em;
+    clear: both;
+}
+#form-content fieldset#buttons input {margin: 20px 0 0 1em; border: 0px none; cursor: pointer;}
+#form-content fieldset#buttons #donation-submit {background-color: #cf2e2e; border-radius: 36px; padding: 10px 20px; color: #fff; font-weight: bold; text-transform: uppercase; letter-spacing: unset; font-size: 16px;}
+#form-content fieldset#buttons #donation-cancel {
+    background-color: #fff !important;
+    border: solid 1px #ddd;
+    border-radius: 36px;
+    color: #499bd4 !important;
+    padding: 8px 7px !important;
+}
+#form-content fieldset#totals {
+    border: none;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+#totals-wrap {
+    width: 45%;
+    margin: 0 auto;
+    text-align: center;
+}
+#form-content fieldset#totals h3 {
+    /* display: inline; */
+    vertical-align: bottom;
+    padding-right: 1em;
+    color: #000000;
+    font-size: 18px;
+    font-style: italic;
+}
+#totals-label {
+    font-size: 16px;
+}
+.formitem label.option, .formitem .description {
+    width: auto;
+    margin-left: 28%;
+    text-align: left;
+}
+.formitem > input, .formitem > textarea {
+    width: 50%;
+}
+.description {
+    font-size: 13px;
+    display: block;
+    font-style: italic;
+    color: #333333;
+    font-weight: normal;
+    font-family: 'Myriad Pro', sans-serif;
+}
+p.warning {
+    background-color: #e0e0e0;
+    color: #a82512;
+    font-size: 18px;
+    padding: 20px 5px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-weight: bold;
+    line-height: 32px;
+}
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (max-width: 1024px) {
+    #main-wrap {
+        width: 100%;
+    }
+    #header-image img {
+        width: 100%;
+    }
+    #thank-you-image-wrap {
+        padding-left: 0px;
+    }
+    #thank-you-text-wrap {
+        padding: 0 30px 0 30px;
+    }
+}
+@media only screen and (max-width: 768px) {
+    #totals-wrap {
+        width: 100%;
+    }
+    #inner-wrap {
+        margin: 20px 20px;
+    }
+    .formitem label {
+        width: 75%;
+        display: block;
+        padding-right: 0.5em;
+        text-align: left;
+    }
+    .formitem > input, .formitem > textarea {
+        width: 80%;
+    }
+    .form-content-header.left {
+        display: none;
+    }
+    .form-content-header.right {
+        float: none;
+        text-align: left;
+        width: 100%;
+    }
+    .form-content-header.right img {
+        width: 100%;
+    }
+    .formitem label.option, .formitem .description {
+        margin-left: 0;
+    }
+    #form-content fieldset#buttons {
+        margin-left: 0;
+        padding: 0;
+    }
+    #donateAmount .donationAmount.left {
+        margin-right: 35px;
+    }
+    #donationDollarSign {
+        display: none;
+    }
+}
+
+</style>
+</head>
+<body>
+<div id="main-wrap">
+	<div id="header-image">
+		<img src="images/HJTA-Presidents-Circle-Header.jpg" width="1280" alt="President's Circle | Howard Jarvis Tax Association" />
+	</div>
+	<div id="inner-wrap">
+		<div id="top-content-wrap">
+			<div id="thank-you-image-wrap"><img src="images/Thank_You_Teal_19618a.png" width="350" alt="Thank You" /></div>
+			<div id="thank-you-text-wrap"><p>...for attending our President Circle’s House Event to Protect Proposition 13. We sincerely appreciate any support as you consider making your tax-deductible donation to HJTF today!</p></div>
+		</div>
+		<div id="form-wrap">
+			<div id="form-header">
+				<div class="form-content-header left"><h1><span class="h1-smaller">Secure Online</span><br />Donation Form</h1></div>
+				<div class="form-content-header right"><img src="images/HJTF-white.png" width="350" /></div>
+			</div>
+			<div id="form-content">
+				<form name="confirm_charge_form" action="complete.php" method="post" onsubmit="return process(this)">
+		<fieldset id="totals" name="totals">
+					<div id="totals-wrap">
+					    <h2 class="pageTitle">Please Confirm</h2>
+						<h3 style="padding-bottom:6px;">Your card will be charged the following:</h3>
+						<strong id="totals-label"><span>$ 5.00</span> <span class="tLabel">Donation</span></strong>
+						<p class="warning"><span class="important">IMPORTANT:</span><br>Authorizing might take 30 seconds.<br>Please press "Confirm" <u>ONLY</u> once.</p>
+					</div>
+				</fieldset>
+
+        <fieldset id="buttons" name="buttons">
+        <input type="hidden" id="sid" name="sid" value="8f138b59bd8afd72d19207d8de09589d----1726971014">
+        <input type="hidden" id="fname" name="fname" value="Tyson">
+        <input type="hidden" id="lname" name="lname" value="Hahn">
+        <input type="hidden" id="addr" name="addr" value="11551 RUBIO AVE">
+        <input type="hidden" id="addr2" name="addr2" value="">
+        <input type="hidden" id="city" name="city" value="Granada Hills">
+        <input type="hidden" id="state" name="state" value="CA">
+        <input type="hidden" id="zip" name="zip" value="91344-2744">
+        <input type="hidden" id="email" name="email" value="tysons_music@yahoo.com">
+        <input type="hidden" id="comments" name="comments" value="">        
+        <input type="hidden" id="cc_name" name="cc_name" value="Tyson Hahn">
+        <input type="hidden" id="cc_number" name="cc_number" value="1111111111111111">
+        <input type="hidden" id="cc_type" name="cc_type" value="MASTERCARD">
+        <input type="hidden" id="cc_last5" name="cc_last5" value="1111">
+        <input type="hidden" id="cc_month" name="cc_month" value="06">
+        <input type="hidden" id="cc_year" name="cc_year" value="27">
+        <input type="hidden" id="cc_cvv" name="cc_cvv" value="432">
+        <input type="hidden" id="contrib" name="contrib" value="5.00">
+          
+       
+         <!-- buttons -->
+		<input id="donation-submit" name="submit" value="Confirm" type="submit">
+		
+		</fieldset>
+        </form>
+			<div>
+				<p>If you are using a VPN (virtual private network) connection, you may receive an error message when connecting to our payment processor. Please try again with the VPN turned off, if possible. We apologize for the inconvenience.</p>
+			</div>
+			</div>			
+		</div>
+	</div>
+</div>
+<script src="scripts/scripts.js"></script>
+</body>
+</html>
