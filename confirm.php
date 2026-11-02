@@ -1,7 +1,7 @@
 <?php
 if (session_status() === PHP_SESSION_NONE){
     session_start();
-    if (!isset($_COOKIE['session_name()'])) setcookie(session_name(), session_id(), 0, NULL, NULL, 0);
+    if (!isset($_COOKIE['session_name()'])) setcookie(session_name(), session_id(), 0);
 }
 
 require_once($_SERVER['DOCUMENT_ROOT']."/common/monologger.php");

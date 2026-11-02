@@ -29,6 +29,7 @@ class AuthorizeNetResponse
     public $response_subcode;
     public $response_reason_code;
     public $response_reason_text;
+    public $error_message;
     public $authorization_code;
     public $avs_response;
     public $transaction_id;
@@ -71,5 +72,36 @@ class AuthorizeNetResponse
     public $requested_amount;
     public $balance_on_card;
     public $response; // The response string from AuthorizeNet.
+    public $version;
+    public $avs_code;
+    public $user_ref;
+    public $card_num;
+    public $test_mode;
+    public $ref_trans_id;
+    public $approved_amount;
+    public $card_balance;
+    public $xml;
+
+    private $_custom_fields = array();
+
+    public function __set($name, $value)
+    {
+        $this->_custom_fields[$name] = $value;
+    }
+
+    public function __get($name)
+    {
+        return array_key_exists($name, $this->_custom_fields) ? $this->_custom_fields[$name] : null;
+    }
+
+    public function __isset($name)
+    {
+        return isset($this->_custom_fields[$name]);
+    }
+
+    public function __unset($name)
+    {
+        unset($this->_custom_fields[$name]);
+    }
 
 }
