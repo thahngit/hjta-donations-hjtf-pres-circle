@@ -219,7 +219,74 @@ $transactionRequestType->setPayment($paymentOne);
 $transactionRequestType->setBillTo($customerAddress);
 $transactionRequestType->setCustomer($customerData);
 $transactionRequestType->addToTransactionSettings($duplicateWindowSetting);
-$transactionRequestType->setCustomerIP($_SERVER['REMOTE_ADDR']);
+
+// original IP capture method (not reliable behind proxies)
+//$transactionRequestType->setCustomerIP($_SERVER['REMOTE_ADDR']);	
+
+	// New IP capture method to get the original client IP behind proxies (Sucuri, GoDaddy, etc.)
+	if (!function_exists('is_trusted_network')) {
+		function is_trusted_network($ip, $cidr) {
+			list($subnet, $bits) = explode('/', $cidr);
+			$ip_long = ip2long($ip);
+			$subnet_long = ip2long($subnet);
+			$mask = -1 << (32 - $bits);
+			$subnet_long &= $mask;
+			return ($ip_long & $mask) == $subnet_long;
+		}
+	}
+
+	$remote_ip = $_SERVER['REMOTE_ADDR'];
+
+	// Known trusted network ranges for your setup
+	$trusted_proxies = [
+		'185.93.228.0/22',   // Sucuri
+		'192.124.249.0/24',  // Sucuri
+		'192.155.224.0/22',  // Sucuri
+		'193.124.99.0/24',   // Sucuri
+		'198.20.87.0/24',    // Sucuri
+		'208.109.0.0/16'     // GoDaddy Data Center Backbone (covers your 208.109.x.x IPs)
+	];
+
+	$is_proxy_connection = false;
+	foreach ($trusted_proxies as $range) {
+		if (is_trusted_network($remote_ip, $range)) {
+			$is_proxy_connection = true;
+			break;
+		}
+	}
+
+	// Extract the customer IP securely
+	if ($is_proxy_connection) {
+		
+		// 1. Check for WP Engine's native visitor tracker header (passed along from the main domain routing)
+		if (!empty($_SERVER['HTTP_WPE_CLUSTER_TYPE'])) {
+			// WP Engine standardizes client tracking in HTTP_X_SERVER_IP or standard HTTP_X_FORWARDED_FOR
+			$header_to_check = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? ($_SERVER['HTTP_X_SERVER_IP'] ?? '');
+		} else {
+			// 2. Fall back to standard forward header passed by Sucuri/GoDaddy routing
+			$header_to_check = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? '';
+		}
+
+		if (!empty($header_to_check)) {
+			// Multi-proxy chains look like: "CustomerIP, WPengineProxyIP, SucuriProxyIP"
+			// The first IP listed on the far left is always the original end-user client.
+			$ip_chain = explode(',', $header_to_check);
+			$candidate_ip = trim($ip_chain[0]);
+
+			if (filter_var($candidate_ip, FILTER_VALIDATE_IP)) {
+				$customer_ip = $candidate_ip;
+			} else {
+				$customer_ip = $remote_ip;
+			}
+		} else {
+			$customer_ip = $remote_ip;
+		}
+	} else {
+		// Direct, un-proxied connection
+		$customer_ip = $remote_ip;
+	}
+
+	$transactionRequestType->setCustomerIP($customer_ip);
 
 // Assemble the complete transaction request
 $request = new AnetAPI\CreateTransactionRequest();
